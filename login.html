@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoseUp - ホーム画面モック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #e5e7eb;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .phone-shadow {
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-[375px] h-[812px] bg-[#f0f0f3] rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+
+    <!-- ログイン画面 -->
+    <div id="login-screen" class="absolute inset-0 bg-[#f0f0f3] z-50 flex flex-col justify-center items-center space-y-6 px-8">
+        <h2 class="text-2xl font-bold">ログイン</h2>
+        <input type="email" placeholder="メールアドレス" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <input type="password" placeholder="パスワード" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <button id="login-button" class="bg-blue-500 text-white px-6 py-2 rounded-xl hover:bg-blue-600">ログイン</button>
+    </div>
+
+    <!-- ドロワーメニュー -->
+    <div id="drawer" class="absolute top-0 right-0 w-[260px] h-full bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300">
+        <div class="p-4 space-y-4">
+            <button id="closeDrawer" class="text-gray-600 hover:text-gray-900">✕ 閉じる</button>
+            <a href="./account.html" class="block text-blue-600">アカウント設定</a>
+            <a href="./calendar.html" class="block text-blue-600">カレンダー</a>
+            <a href="./FAQ.html" class="block text-blue-600">FAQ一覧</a>
+            <a href="./first-start.html" class="block text-blue-600">初回起動</a>
+            <a href="./setting.html" class="block text-blue-600">設定</a>
+            <a href="./home-hamburger.html" class="block text-blue-600">ホームハンバーガー</a>
+            <a href="./home-tab.html" class="block text-blue-600">ホームタブ</a>
+            <a href="./chat.html" class="block text-blue-600">チャット</a>
+            <a href="./form.html" class="block text-blue-600">フォーム</a>
+            <a href="./grid.html" class="block text-blue-600">グリッド</a>
+            <a href="login.html" class="block text-blue-600">ログイン</a>
+
+        </div>
+    </div>
+
+    <!-- オーバーレイ -->
+    <div id="overlay" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-30 hidden"></div>
+
+    <!-- 全体スクロール領域 -->
+    <div class="relative z-10 w-full h-full overflow-y-auto hide-scrollbar">
+
+        <!-- ノッチ＋ヘッダー 固定部分 -->
+        <div class="sticky top-0 z-20 bg-[#f0f0f3]">
+            <div class="w-24 h-5 bg-black rounded-b-lg mt-2 mx-auto"></div>
+            <header class="flex justify-between items-center px-6 py-4">
+                <h1 class="text-xl font-bold">Dose</h1>
+                <button id="hamburger" class="flex flex-col space-y-[4px] z-40">
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                </button>
+            </header>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="px-6 space-y-4 pb-16">
+            <h2 class="text-lg font-semibold">今日の服薬予定</h2>
+            <div id="card-container" class="space-y-4"></div>
+
+            <!-- 追加ボタン -->
+            <div class="flex justify-center pt-4">
+                <button class="bg-white text-blue-600 px-6 py-2 rounded-xl shadow-inner border border-blue-100 hover:bg-blue-50">
+                    ＋ リマインダーを追加
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const drawer = document.getElementById("drawer");
+        const overlay = document.getElementById("overlay");
+        const closeDrawer = document.getElementById("closeDrawer");
+        const loginScreen = document.getElementById("login-screen");
+        const loginButton = document.getElementById("login-button");
+
+        hamburger.addEventListener("click", () => {
+            drawer.classList.remove("translate-x-full");
+            overlay.classList.remove("hidden");
+        });
+
+        closeDrawer.addEventListener("click", () => {
+            drawer.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+        });
+
+        overlay.addEventListener("click", () => {
+            drawer.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+        });
+
+        loginButton.addEventListener("click", () => {
+            loginScreen.classList.add("hidden");
+        });
+
+        const doses = [
+            ["アムロジピン 5mg", "8:00 AM", "bg-green-500", "服用済"],
+            ["ビタミンC", "12:00 PM", "bg-yellow-400", "スヌーズ中"],
+            ["ビオフェルミン", "21:00 PM", "bg-red-500", "未服用"],
+            ["整腸剤", "10:00 AM", "bg-green-500", "服用済"],
+            ["鉄剤", "15:00 PM", "bg-yellow-400", "スヌーズ中"],
+            ["漢方", "20:00 PM", "bg-red-500", "未服用"]
+        ];
+
+        const container = document.getElementById("card-container");
+        doses.forEach(([name, time, color, label]) => {
+            const div = document.createElement("div");
+            div.className = "p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#ffffff,-9px_-9px_16px_#c8c8cb] flex justify-between items-center";
+            div.innerHTML = `
+        <div>
+          <p class="font-medium">${name}</p>
+          <p class="text-sm text-gray-500">${time}</p>
+        </div>
+        <button class="${color} text-white px-3 py-1 text-sm rounded-full">${label}</button>
+      `;
+            container.appendChild(div);
+        });
+    });
+</script>
+
+</body>
+</html>

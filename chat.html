@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoseUp - チャット画面モック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #e5e7eb;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .phone-shadow {
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-[375px] h-[812px] bg-[#f0f0f3] rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+
+    <!-- ドロワーメニュー -->
+    <div id="drawer" class="absolute top-0 right-0 w-[260px] h-full bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300">
+        <div class="p-4 space-y-4">
+            <button id="closeDrawer" class="text-gray-600 hover:text-gray-900">✕ 閉じる</button>
+            <a href="./account.html" class="block text-blue-600">アカウント設定</a>
+            <a href="./calendar.html" class="block text-blue-600">カレンダー</a>
+            <a href="./FAQ.html" class="block text-blue-600">FAQ一覧</a>
+            <a href="./first-start.html" class="block text-blue-600">初回起動</a>
+            <a href="./setting.html" class="block text-blue-600">設定</a>
+            <a href="./home-hamburger.html" class="block text-blue-600">ホームハンバーガー</a>
+            <a href="./home-tab.html" class="block text-blue-600">ホームタブ</a>
+            <a href="./chat.html" class="block text-blue-600">チャット</a>
+            <a href="./form.html" class="block text-blue-600">フォーム</a>
+            <a href="./grid.html" class="block text-blue-600">グリッド</a>
+            <a href="login.html" class="block text-blue-600">ログイン</a>
+
+        </div>
+    </div>
+
+    <!-- オーバーレイ -->
+    <div id="overlay" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-30 hidden"></div>
+
+    <!-- チャット画面本体 -->
+    <div class="relative z-10 w-full h-full flex flex-col">
+
+        <!-- ノッチ＋ヘッダー -->
+        <div class="sticky top-0 z-20 bg-[#f0f0f3]">
+            <div class="w-24 h-5 bg-black rounded-b-lg mt-2 mx-auto"></div>
+            <header class="flex justify-between items-center px-6 py-4">
+                <h1 class="text-xl font-bold">サポートチャット</h1>
+                <button id="hamburger" class="flex flex-col space-y-[4px] z-40">
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                    <span class="w-6 h-[2px] bg-blue-500"></span>
+                </button>
+            </header>
+        </div>
+
+        <!-- チャットメッセージエリア -->
+        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-3 hide-scrollbar">
+            <div class="self-start max-w-[80%] bg-white text-gray-800 px-4 py-2 rounded-2xl shadow">こんにちは！何かお困りですか？</div>
+            <div class="self-end max-w-[80%] bg-blue-500 text-white px-4 py-2 rounded-2xl shadow ml-auto">薬の追加方法を教えてください。</div>
+            <div class="self-start max-w-[80%] bg-white text-gray-800 px-4 py-2 rounded-2xl shadow">メイン画面の「＋」ボタンから追加できますよ。</div>
+            <div class="self-end max-w-[80%] bg-blue-500 text-white px-4 py-2 rounded-2xl shadow ml-auto">ありがとうございます！</div>
+            <div class="self-start max-w-[80%] bg-white text-gray-800 px-4 py-2 rounded-2xl shadow">他にも何か質問はありますか？</div>
+            <div class="self-end max-w-[80%] bg-blue-500 text-white px-4 py-2 rounded-2xl shadow ml-auto">服用履歴はどこで確認できますか？</div>
+            <div class="self-start max-w-[80%] bg-white text-gray-800 px-4 py-2 rounded-2xl shadow">カレンダー画面から日別に確認できます。</div>
+        </div>
+
+        <!-- 入力欄 -->
+        <div class="px-4 py-3 bg-[#f0f0f3] border-t border-gray-300 flex items-center space-x-2">
+            <input type="text" placeholder="メッセージを入力" class="flex-1 px-4 py-2 rounded-full bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-full">送信</button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const drawer = document.getElementById("drawer");
+        const overlay = document.getElementById("overlay");
+        const closeDrawer = document.getElementById("closeDrawer");
+
+        hamburger.addEventListener("click", () => {
+            drawer.classList.remove("translate-x-full");
+            overlay.classList.remove("hidden");
+        });
+
+        closeDrawer.addEventListener("click", () => {
+            drawer.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+        });
+
+        overlay.addEventListener("click", () => {
+            drawer.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+        });
+    });
+</script>
+
+</body>
+</html>

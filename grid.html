@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DoseUp - カレンダー</title>
+  <title>DoseUp - ホーム画面モック</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-color: #f3f4f6;
+      background-color: #e5e7eb;
       font-family: 'Noto Sans', sans-serif;
     }
     .phone-shadow {
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
     }
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
@@ -24,7 +24,7 @@
 </head>
 <body class="flex items-center justify-center min-h-screen">
 
-<div class="w-[375px] h-[812px] bg-white rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+<div class="w-[375px] h-[812px] bg-[#f0f0f3] rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
 
   <!-- ドロワーメニュー -->
   <div id="drawer" class="absolute top-0 right-0 w-[260px] h-full bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300">
@@ -44,17 +44,18 @@
 
     </div>
   </div>
+
   <!-- オーバーレイ -->
   <div id="overlay" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-30 hidden"></div>
 
-  <!-- メインスクロール -->
+  <!-- 全体スクロール領域 -->
   <div class="relative z-10 w-full h-full overflow-y-auto hide-scrollbar">
 
     <!-- ノッチ＋ヘッダー -->
-    <div class="sticky top-0 z-20 bg-white border-b border-gray-200">
+    <div class="sticky top-0 z-20 bg-[#f0f0f3]">
       <div class="w-24 h-5 bg-black rounded-b-lg mt-2 mx-auto"></div>
       <header class="flex justify-between items-center px-6 py-4">
-        <h1 class="text-xl font-bold">カレンダー</h1>
+        <h1 class="text-xl font-bold">Dose</h1>
         <button id="hamburger" class="flex flex-col space-y-[4px] z-40">
           <span class="w-6 h-[2px] bg-blue-500"></span>
           <span class="w-6 h-[2px] bg-blue-500"></span>
@@ -63,25 +64,25 @@
       </header>
     </div>
 
-    <!-- カレンダー -->
-    <div class="px-6 py-4 bg-gray-50 pb-20">
-      <div class="text-center font-semibold text-lg mb-4">2025年7月</div>
+    <!-- メインコンテンツ -->
+    <div class="px-6 space-y-4 pb-16">
+      <h2 class="text-lg font-semibold">今日の服薬予定</h2>
 
-      <!-- 曜日 -->
-      <div class="grid grid-cols-7 text-center text-sm text-gray-600 mb-2">
-        <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
-      </div>
+      <!-- グリッドコンテナ -->
+      <div id="card-container" class="grid grid-cols-2 gap-4"></div>
 
-      <!-- 日付 -->
-      <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center text-sm">
-        <!-- JavaScriptで挿入 -->
+      <!-- 追加ボタン -->
+      <div class="flex justify-center pt-4">
+        <button class="bg-white text-blue-600 px-6 py-2 rounded-xl shadow-inner border border-blue-100 hover:bg-blue-50">
+          ＋ リマインダーを追加
+        </button>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- JS -->
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
@@ -94,7 +95,7 @@
       overlay.classList.remove("hidden");
     });
 
-    closeDrawer?.addEventListener("click", () => {
+    closeDrawer.addEventListener("click", () => {
       drawer.classList.add("translate-x-full");
       overlay.classList.add("hidden");
     });
@@ -104,30 +105,32 @@
       overlay.classList.add("hidden");
     });
 
-    // ===== カレンダー日付描画 =====
-    const calendarGrid = document.getElementById("calendar-grid");
-    const totalDays = 31;
-    const startOffset = 2; // 火曜日始まり：日→月→火
+    const doses = [
+      ["アムロジピン 5mg", "8:00 AM", "bg-green-500", "服用済"],
+      ["ビタミンC", "12:00 PM", "bg-yellow-400", "スヌーズ中"],
+      ["ビオフェルミン", "21:00 PM", "bg-red-500", "未服用"],
+      ["整腸剤", "10:00 AM", "bg-green-500", "服用済"],
+      ["鉄剤", "15:00 PM", "bg-yellow-400", "スヌーズ中"],
+      ["漢方", "20:00 PM", "bg-red-500", "未服用"],
+      ["アムロジピン 5mg", "8:00 AM", "bg-green-500", "服用済"],
+      ["ビタミンC", "12:00 PM", "bg-yellow-400", "スヌーズ中"],
+      ["ビオフェルミン", "21:00 PM", "bg-red-500", "未服用"],
+      ["整腸剤", "10:00 AM", "bg-green-500", "服用済"]
+    ];
 
-    const markDays = [2, 5, 9, 16, 22];
-
-    for (let i = 0; i < startOffset; i++) {
-      const blank = document.createElement("div");
-      calendarGrid.appendChild(blank);
-    }
-
-    for (let day = 1; day <= totalDays; day++) {
+    const container = document.getElementById("card-container");
+    doses.forEach(([name, time, color, label]) => {
       const div = document.createElement("div");
-      div.className = "py-2 bg-white rounded-lg shadow-sm relative";
+      div.className = "p-4 rounded-2xl bg-[#f0f0f3] shadow-[inset_4px_4px_10px_#d1d9e6,inset_-4px_-4px_10px_#ffffff] flex flex-col justify-between";
       div.innerHTML = `
-        <div>${day}</div>
-        ${markDays.includes(day)
-          ? '<span class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-blue-500 rounded-full"></span>'
-          : ''
-        }
+        <div>
+          <p class="font-medium text-sm">${name}</p>
+          <p class="text-xs text-gray-500">${time}</p>
+        </div>
+        <button class="${color} text-white text-xs mt-2 py-1 rounded-full">${label}</button>
       `;
-      calendarGrid.appendChild(div);
-    }
+      container.appendChild(div);
+    });
   });
 </script>
 
