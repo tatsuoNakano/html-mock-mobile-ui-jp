@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoseUp - タブメニュー版</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #e5e7eb;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .phone-shadow {
+      box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<!-- スマホ端末風の枠 -->
+<div class="w-[375px] h-[812px] bg-[#f0f0f3] rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+
+  <!-- ノッチ -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-b-lg mt-2 z-10"></div>
+
+  <!-- メイン表示領域 -->
+  <div class="relative z-0 w-full h-full px-6 pt-6 pb-24 overflow-hidden">
+    <div id="scroll-area" class="h-full overflow-y-auto no-scrollbar space-y-6 pr-1">
+
+      <header class="flex justify-between items-center">
+        <h1 class="text-xl font-bold">Dose</h1>
+      </header>
+
+      <!-- ホームタブ -->
+      <div id="tab-home">
+        <h2 class="text-lg font-semibold">今日の服薬予定</h2>
+        <div class="space-y-4">
+          <!-- 服薬カード x10（凸型） -->
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div>
+              <p class="font-medium text-base">アムロジピン 5mg</p>
+              <p class="text-sm text-gray-500">8:00 AM</p>
+            </div>
+            <button class="bg-green-500 text-white px-3 py-1 text-sm rounded-full">服用済</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div>
+              <p class="font-medium text-base">ビタミンC</p>
+              <p class="text-sm text-gray-500">12:00 PM</p>
+            </div>
+            <button class="bg-yellow-400 text-white px-3 py-1 text-sm rounded-full">スヌーズ中</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div>
+              <p class="font-medium text-base">ビオフェルミン</p>
+              <p class="text-sm text-gray-500">21:00 PM</p>
+            </div>
+            <button class="bg-red-500 text-white px-3 py-1 text-sm rounded-full">未服用</button>
+          </div>
+          <!-- 7個ダミー追加 -->
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">鉄剤</p><p class="text-sm text-gray-500">7:00 AM</p></div>
+            <button class="bg-green-500 text-white px-3 py-1 text-sm rounded-full">服用済</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">整腸剤</p><p class="text-sm text-gray-500">10:30 AM</p></div>
+            <button class="bg-red-500 text-white px-3 py-1 text-sm rounded-full">未服用</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">セファレキシン</p><p class="text-sm text-gray-500">14:00 PM</p></div>
+            <button class="bg-green-500 text-white px-3 py-1 text-sm rounded-full">服用済</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">マルチビタミン</p><p class="text-sm text-gray-500">16:00 PM</p></div>
+            <button class="bg-yellow-400 text-white px-3 py-1 text-sm rounded-full">スヌーズ中</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">オメプラゾール</p><p class="text-sm text-gray-500">18:00 PM</p></div>
+            <button class="bg-red-500 text-white px-3 py-1 text-sm rounded-full">未服用</button>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#f0f0f3] shadow-[9px_9px_16px_#bebebe,-9px_-9px_16px_#ffffff] flex justify-between items-center">
+            <div><p class="font-medium text-base">アレグラ</p><p class="text-sm text-gray-500">22:00 PM</p></div>
+            <button class="bg-green-500 text-white px-3 py-1 text-sm rounded-full">服用済</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 履歴タブ -->
+      <div id="tab-history" class="hidden">
+        <h2 class="text-lg font-semibold">服薬履歴</h2>
+        <p class="text-gray-600 mt-4">過去の記録がここに表示されます（仮）</p>
+      </div>
+
+      <!-- 設定タブ -->
+      <div id="tab-settings" class="hidden">
+        <h2 class="text-lg font-semibold">設定</h2>
+        <p class="text-gray-600 mt-4">アプリの設定項目（仮）</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- タブナビゲーション -->
+  <div class="absolute bottom-0 left-0 w-full bg-white border-t border-gray-300 flex justify-around py-3 z-10">
+    <button class="tab-button text-blue-600 font-semibold" data-target="home">ホーム</button>
+    <button class="tab-button text-gray-500" data-target="history">履歴</button>
+    <button class="tab-button text-gray-500" data-target="settings">設定</button>
+  </div>
+</div>
+
+<script>
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabs = {
+    home: document.getElementById("tab-home"),
+    history: document.getElementById("tab-history"),
+    settings: document.getElementById("tab-settings")
+  };
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-target");
+
+      for (const key in tabs) {
+        tabs[key].classList.toggle("hidden", key !== target);
+      }
+
+      tabButtons.forEach(b => {
+        const isActive = b.getAttribute("data-target") === target;
+        b.classList.toggle("text-blue-600", isActive);
+        b.classList.toggle("font-semibold", isActive);
+        b.classList.toggle("text-gray-500", !isActive);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

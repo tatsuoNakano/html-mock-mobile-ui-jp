@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #e5e7eb;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .phone-shadow {
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .slide {
+      flex: 0 0 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-[375px] h-[812px] bg-white rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+
+  <!-- ドロワーメニュー -->
+  <div id="drawer" class="absolute top-0 right-0 w-[260px] h-full bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300">
+    <div class="p-4 space-y-4">
+      <button id="closeDrawer" class="text-gray-600 hover:text-gray-900">✕ 閉じる</button>
+      <a href="./account.html" class="block text-blue-600">アカウント設定</a>
+      <a href="./calendar.html" class="block text-blue-600">カレンダー</a>
+      <a href="./FAQ.html" class="block text-blue-600">FAQ一覧</a>
+      <a href="./first-start.html" class="block text-blue-600">初回起動</a>
+      <a href="./setting.html" class="block text-blue-600">設定</a>
+      <a href="./home-hamburger.html" class="block text-blue-600">ホームハンバーガー</a>
+      <a href="./home-tab.html" class="block text-blue-600">ホームタブ</a>
+    </div>
+  </div>
+  <!-- オーバーレイ -->
+  <div id="overlay" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-30 hidden"></div>
+
+  <!-- ノッチ＋ヘッダー -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-b-lg mt-2 z-10"></div>
+  <header class="absolute top-8 left-0 w-full px-6 flex justify-between items-center z-20">
+    <h1 class="text-lg font-bold">Welcome</h1>
+    <button id="hamburger" class="flex flex-col space-y-[4px] z-40">
+      <span class="w-6 h-[2px] bg-blue-500"></span>
+      <span class="w-6 h-[2px] bg-blue-500"></span>
+      <span class="w-6 h-[2px] bg-blue-500"></span>
+    </button>
+  </header>
+
+  <!-- スライド -->
+  <div class="flex h-full w-full overflow-hidden relative z-10 pt-16">
+    <div class="flex w-full h-full transition-transform duration-500" id="slides">
+      <div class="slide flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-2xl font-bold mb-4">ようこそ</h2>
+        <p class="text-gray-600">服薬を忘れず、健康を守りましょう。</p>
+      </div>
+      <div class="slide flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-2xl font-bold mb-4">リマインダー機能</h2>
+        <p class="text-gray-600">薬の時間を通知でお知らせします。</p>
+      </div>
+      <div class="slide flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-2xl font-bold mb-4">記録と履歴</h2>
+        <p class="text-gray-600">服薬履歴をいつでも確認できます。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="absolute bottom-6 w-full flex flex-col items-center gap-4 z-20">
+    <div class="flex gap-2" id="dots">
+      <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
+    </div>
+    <button id="nextBtn" class="bg-blue-500 text-white px-6 py-2 rounded-full">次へ</button>
+  </div>
+</div>
+
+<script>
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('#dots > div');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentSlide = 0;
+
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < 2) {
+      currentSlide++;
+      slides.style.transform = `translateX(-${100 * currentSlide}%)`;
+      dots.forEach((dot, i) => {
+        dot.className = i === currentSlide
+          ? 'w-2.5 h-2.5 rounded-full bg-blue-500'
+          : 'w-2.5 h-2.5 rounded-full bg-gray-300';
+      });
+      if (currentSlide === 2) nextBtn.textContent = 'はじめる';
+    } else {
+      alert('スタートします');
+    }
+  });
+
+  // ハンバーガーメニュー制御
+  const hamburger = document.getElementById("hamburger");
+  const drawer = document.getElementById("drawer");
+  const overlay = document.getElementById("overlay");
+  const closeDrawer = document.getElementById("closeDrawer");
+
+  hamburger.addEventListener("click", () => {
+    drawer.classList.remove("translate-x-full");
+    overlay.classList.remove("hidden");
+  });
+
+  closeDrawer.addEventListener("click", () => {
+    drawer.classList.add("translate-x-full");
+    overlay.classList.add("hidden");
+  });
+
+  overlay.addEventListener("click", () => {
+    drawer.classList.add("translate-x-full");
+    overlay.classList.add("hidden");
+  });
+</script>
+
+</body>
+</html>

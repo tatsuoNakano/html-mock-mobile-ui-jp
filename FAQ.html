@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoseUp - FAQ画面</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f3f4f6;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .phone-shadow {
+      box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-[375px] h-[812px] bg-white rounded-[2rem] phone-shadow border-[6px] border-white relative overflow-hidden">
+
+  <!-- ドロワーメニュー -->
+  <div id="drawer" class="absolute top-0 right-0 w-[260px] h-full bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300">
+    <div class="p-4 space-y-4">
+      <button id="closeDrawer" class="text-gray-600 hover:text-gray-900">✕ 閉じる</button>
+      <a href="./account.html" class="block text-blue-600">アカウント設定</a>
+      <a href="./calendar.html" class="block text-blue-600">カレンダー</a>
+      <a href="./FAQ.html" class="block text-blue-600">FAQ一覧</a>
+      <a href="./first-start.html" class="block text-blue-600">初回起動</a>
+      <a href="./setting.html" class="block text-blue-600">設定</a>
+      <a href="./home-hamburger.html" class="block text-blue-600">ホームハンバーガー</a>
+      <a href="./home-tab.html" class="block text-blue-600">ホームタブ</a>
+    </div>
+  </div>
+
+  <!-- オーバーレイ -->
+  <div id="overlay" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-30 hidden"></div>
+
+  <!-- スクロール領域 -->
+  <div class="relative z-10 w-full h-full overflow-y-auto hide-scrollbar">
+
+    <!-- ノッチとヘッダー -->
+    <div class="sticky top-0 z-20 bg-white border-b border-gray-200">
+      <div class="w-24 h-5 bg-black rounded-b-lg mt-2 mx-auto"></div>
+      <header class="flex justify-between items-center px-6 py-4">
+        <h1 class="text-xl font-bold">よくある質問</h1>
+        <button id="hamburger" class="flex flex-col space-y-[4px] z-40">
+          <span class="w-6 h-[2px] bg-blue-500"></span>
+          <span class="w-6 h-[2px] bg-blue-500"></span>
+          <span class="w-6 h-[2px] bg-blue-500"></span>
+        </button>
+      </header>
+    </div>
+
+    <!-- FAQ一覧 -->
+   <!-- FAQ一覧 -->
+<div class="px-6 py-4 space-y-4 pb-20 bg-gray-50">
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. 通知が届きません</p>
+    <p class="text-sm text-gray-700">スマホの通知設定とバッテリー制御設定をご確認ください。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. スヌーズとは何ですか？</p>
+    <p class="text-sm text-gray-700">通知を一時的に先延ばしにする機能です。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. データの保存先は？</p>
+    <p class="text-sm text-gray-700">現在はお使いの端末にローカル保存されています。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. 多言語に対応していますか？</p>
+    <p class="text-sm text-gray-700">現時点では日本語のみですが、今後英語・中国語への対応を予定しています。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. 薬の通知時間は変更できますか？</p>
+    <p class="text-sm text-gray-700">はい、各リマインダーから個別に変更可能です。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. アカウントを削除できますか？</p>
+    <p class="text-sm text-gray-700">設定画面から「アカウント削除」を選択してください。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. バックアップ機能はありますか？</p>
+    <p class="text-sm text-gray-700">現在は未対応ですが、将来的な実装を検討しています。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. 通知音は変更できますか？</p>
+    <p class="text-sm text-gray-700">いいえ、現在はシステム通知音のみ使用されます。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. ダークモードには対応していますか？</p>
+    <p class="text-sm text-gray-700">現在は未対応ですが、対応予定です。</p>
+  </div>
+
+  <div class="bg-white border rounded-lg p-4 shadow-sm">
+    <p class="font-semibold mb-1">Q. アプリのバージョンはどこで確認できますか？</p>
+    <p class="text-sm text-gray-700">設定画面の一番下にバージョン情報が表示されています。</p>
+  </div>
+
+</div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const drawer = document.getElementById("drawer");
+    const overlay = document.getElementById("overlay");
+    const closeDrawer = document.getElementById("closeDrawer");
+
+    hamburger.addEventListener("click", () => {
+      drawer.classList.remove("translate-x-full");
+      overlay.classList.remove("hidden");
+    });
+
+    closeDrawer.addEventListener("click", () => {
+      drawer.classList.add("translate-x-full");
+      overlay.classList.add("hidden");
+    });
+
+    overlay.addEventListener("click", () => {
+      drawer.classList.add("translate-x-full");
+      overlay.classList.add("hidden");
+    });
+  });
+</script>
+
+</body>
+</html>
